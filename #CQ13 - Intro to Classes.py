@@ -20,31 +20,33 @@ class SavingsAccount:
     def get_monthly_interest(self):
         return self.balance * self.get_monthly_rate()
 
-    def balance_change(self):
+    def get_balance_change(self):
         return ((self.balance - self.p_balance) / self.p_balance) * 100
 
-    def Deposit(self, amount_out):
-        if amount_out > balance:
+    def withdraw(self, amount):
+        if amount > self.balance:
             print("Insufficient Funds!")
         else:
-            self.balance = self.balance - amount_out
+            self.balance -= amount
 
-    def Withdrawal(self, amount_out):
-        self.balance = self.balance + amount_out
-
-#Function
-account = SavingsAccount(1222, 20_000.0, 18_500.0, 4.5)
-
-#ACCOUNT OVERVIEW PRINTS
-    print(f"Your Account ID: {account.accountid}")
-    print(f"Your Current Balance: {account.balance}")
-    print(f"Your Current Interest Rate: {account.interest_rate}")
-    print(f"Your Current Monthly Interest Rate: {account.get_monthly_rate()}")
-    print(f"Your Account Balance Change as a Percent is {account.balance_change()}")
-
-
+    def deposit(self, amount):
+        self.balance += amount
 
 def main():
+    account = SavingsAccount(1122, 20_000.0, 18_500.0, 4.5)
+
+    #WITHDRAWAL
+    account.withdraw(2500.0)
+
+    #DEPOSIT
+    account.deposit(3000.0)
+
+    #ACCOUNT OVERVIEW PRINTS
+    print(f"Account ID: {account.account_id}")
+    print(f"Current Balance: ${account.balance:.2f}")
+    print(f"Monthly Interest Rate: {account.get_monthly_rate():.6f}")
+    print(f"Monthly Interest: ${account.get_monthly_interest():.2f}")
+    print(f"Percentage Change: {account.get_balance_change():.2f}%")
 
 if __name__ == "__main__":
     main()
